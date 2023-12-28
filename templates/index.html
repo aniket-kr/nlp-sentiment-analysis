@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMDb Review Sentiment Analysis</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <main>
+            <h1>IMDb Review Sentiment Analysis</h1>
+
+            <form method="POST">
+                <input name="query" type="text" placeholder="Enter your review..."
+                    value="{{ query if has_output else '' }}" required>
+                <button type='submit' class="submit-btn">Predict Sentiment</button>
+            </form>
+        </main>
+
+        {% if has_output %}
+        <section>
+            <p>
+                The user sentiment is
+                {% if rating >= 5 %}
+                <span class="positive">Positive</span>
+                {% else %}
+                <span class="negative">Negative</span>
+                {% endif %}
+            </p>
+            <span class="rating">{{ rating|round(2) }} / 10</span>
+        </section>
+        {% endif %}
+    </div>
+</body>
+
+</html>
